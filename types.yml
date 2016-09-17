@@ -1,0 +1,7 @@
+Types:
+  - Type: string
+    Name: String
+  - Type: int
+    Name: Int
+  - Type: bool
+    Name: Bool

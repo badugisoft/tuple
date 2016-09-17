@@ -1,0 +1,34 @@
+{{define "main"}}
+// ********************************************************* //
+// The content of this file is auto-generated, DO NOT MODIFY //
+// ********************************************************* //
+
+package tuple
+
+{{$types := .Types}}
+
+{{range $f := $types}}
+	{{template "tmpl" gtMakeMap "Name" (printf "%s" $f.Name) "FirstType" $f.Type "SecondType" $f.Type}}
+	{{range $s := $types}}
+		{{if (ne $f.Name $s.Name)}}
+			{{template "tmpl" gtMakeMap "Name" (printf "%s%s" $f.Name $s.Name) "FirstType" $f.Type "SecondType" $s.Type}}
+		{{end}}
+	{{end}}
+{{end}}
+
+{{end}}
+
+{{define "tmpl"}}
+type {{.Name}}Pair struct {
+	First  {{.FirstType}}
+	Second {{.SecondType}}
+}
+
+func New{{.Name}}Pair(f {{.FirstType}}, s {{.SecondType}}) {{.Name}}Pair {
+	return {{.Name}}Pair{First: f, Second: s}
+}
+
+func Newp{{.Name}}Pair(f {{.FirstType}}, s {{.SecondType}}) *{{.Name}}Pair {
+	return &{{.Name}}Pair{First: f, Second: s}
+}
+{{end}}

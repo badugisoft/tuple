@@ -1,0 +1,37 @@
+{{define "main"}}
+// ********************************************************* //
+// The content of this file is auto-generated, DO NOT MODIFY //
+// ********************************************************* //
+
+package tuple
+
+{{$types := .Types}}
+
+{{range $f := $types}}
+	{{template "tmpl" gtMakeMap "Name" (printf "%s" $f.Name) "FirstType" $f.Type "SecondType" $f.Type "ThirdType" $f.Type}}
+	{{/*range $s := $types}}
+		{{if (eq $f.Name $s.Name)}}
+			{{template "tmpl" gtMakeMap "Name" (printf "%ss" $f.Name) "FirstType" $f.Type "SecondType" $f.Type}}
+		{{else}}
+			{{template "tmpl" gtMakeMap "Name" (printf "%s%s" $f.Name $s.Name) "FirstType" $f.Type "SecondType" $s.Type}}
+		{{end}}
+	{{end*/}}
+{{end}}
+
+{{end}}
+
+{{define "tmpl"}}
+type {{.Name}}Triplet struct {
+	First  {{.FirstType}}
+	Second {{.SecondType}}
+	Third  {{.ThirdType}}
+}
+
+func New{{.Name}}Triplet(f {{.FirstType}}, s {{.SecondType}}, t {{.ThirdType}}) {{.Name}}Triplet {
+	return {{.Name}}Triplet{First: f, Second: s, Third: t}
+}
+
+func Newp{{.Name}}Triplet(f {{.FirstType}}, s {{.SecondType}}, t {{.ThirdType}}) *{{.Name}}Triplet {
+	return &{{.Name}}Triplet{First: f, Second: s, Third: t}
+}
+{{end}}

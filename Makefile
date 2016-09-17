@@ -9,19 +9,17 @@ generated := $(foreach name, $(functions), $(name).gen.go)
 all: *.go $(generated)
 	@go test -v
 
-%.gen.go: templates/%.tmpl
+%.gen.go: templates/%.tmpl types.yml
 	@echo generating... $@
-	@echo "go-template $< < types.yml | gofmt | goimports > $@"
-	@go-template $< < types.yml | gofmt > $@
-#	@go-template $< < types.yml | gofmt | goimports > $@
+	@go-template $< < types.yml | gofmt | goimports > $@
 
 test:
 	@go test -v
 
 tools:
-	@go get cmd/gofmt
-	@go get golang.org/x/tools/cmd/goimports
-	@go get github.com/tsg/gotpl
+	@go get -u cmd/gofmt
+	@go get -u golang.org/x/tools/cmd/goimports
+	@go get -u github.com/badugisoft/go-template
 
 clean:
 	@rm *.gen.go

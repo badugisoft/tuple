@@ -8,14 +8,19 @@ package tuple
 {{$types := .Types}}
 
 {{range $f := $types}}
-	{{template "tmpl" gtMakeMap "Name" (printf "%s" $f.Name) "FirstType" $f.Type "SecondType" $f.Type "ThirdType" $f.Type}}
-	{{/*range $s := $types}}
-		{{if (eq $f.Name $s.Name)}}
-			{{template "tmpl" gtMakeMap "Name" (printf "%ss" $f.Name) "FirstType" $f.Type "SecondType" $f.Type}}
-		{{else}}
-			{{template "tmpl" gtMakeMap "Name" (printf "%s%s" $f.Name $s.Name) "FirstType" $f.Type "SecondType" $s.Type}}
+	{{template "tmpl" gtMakeMap "Name" (printf "%s" $f.Name) "FirstType" $f.Type "SecondType" "interface{}" "ThirdType" "interface{}"}}
+	{{template "tmpl" gtMakeMap "Name" (printf "%ss" $f.Name) "FirstType" $f.Type "SecondType" $f.Type "ThirdType" $f.Type}}
+	{{range $s := $types}}
+		{{if (ne $f.Name $s.Name)}}
+			{{template "tmpl" gtMakeMap "Name" (printf "%ss%s" $f.Name $s.Name) "FirstType" $f.Type "SecondType" $f.Type "ThirdType" $s.Type}}
+			{{template "tmpl" gtMakeMap "Name" (printf "%s%ss" $f.Name $s.Name) "FirstType" $f.Type "SecondType" $s.Type "ThirdType" $s.Type}}
+			{{range $t := $types}}
+				{{if (ne $s.Name $t.Name)}}
+					{{template "tmpl" gtMakeMap "Name" (printf "%s%s%s" $f.Name $s.Name $t.Name) "FirstType" $f.Type "SecondType" $s.Type "ThirdType" $t.Type}}
+				{{end}}
+			{{end}}
 		{{end}}
-	{{end*/}}
+	{{end}}
 {{end}}
 
 {{end}}

@@ -3,5 +3,11 @@ Types:
     Name: String
   - Type: int
     Name: Int
+  - Type: uint
+    Name: Uint
+  - Type: int64
+    Name: Int64
+  - Type: uint64
+    Name: Uint64
   - Type: bool
     Name: Bool

@@ -8,7 +8,8 @@ package tuple
 {{$types := .Types}}
 
 {{range $f := $types}}
-	{{template "tmpl" gtMakeMap "Name" (printf "%s" $f.Name) "FirstType" $f.Type "SecondType" $f.Type}}
+	{{template "tmpl" gtMakeMap "Name" (printf "%s" $f.Name) "FirstType" $f.Type "SecondType" "interface{}"}}
+	{{template "tmpl" gtMakeMap "Name" (printf "%ss" $f.Name) "FirstType" $f.Type "SecondType" $f.Type}}
 	{{range $s := $types}}
 		{{if (ne $f.Name $s.Name)}}
 			{{template "tmpl" gtMakeMap "Name" (printf "%s%s" $f.Name $s.Name) "FirstType" $f.Type "SecondType" $s.Type}}
